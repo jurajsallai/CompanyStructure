@@ -1,4 +1,7 @@
-// po dokonceni sa vratit na SoftwareEngineer
+/* finish requestBonus() and BusinessLead Class 
+ * *********************************************
+ */
+
 import java.util.ArrayList;
 
 
