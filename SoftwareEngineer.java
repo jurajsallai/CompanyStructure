@@ -1,5 +1,3 @@
-// neni dokoncene, najprv spravit TechnicalLead potom pokracovat tu
-
 class SoftwareEngineer extends TechnicalEmployee {
     private boolean access;
 
