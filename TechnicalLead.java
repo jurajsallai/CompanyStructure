@@ -1,12 +1,8 @@
-/* finish requestBonus() and BusinessLead Class 
- * *********************************************
- */
-
 import java.util.ArrayList;
 
 
 class TechnicalLead extends TechnicalEmployee {
-    private double baseSalary;
+    //private double baseSalary;
     private int headCount;
     private ArrayList<SoftwareEngineer> team;
 
@@ -24,17 +20,17 @@ class TechnicalLead extends TechnicalEmployee {
     }
 
 
-    // returns size of team
+    // returns size of this team
     public int getTeamSize() {
         return this.team.size();
     }
 
     // getter for team for use in Accountant
-    public ArrayList getTeam() {
+    public ArrayList<SoftwareEngineer> getTeam() {
         return this.team;
     }
 
-    // returns size of headCount
+    // returns size of this headCount
     public int getHeadCount() {
         return this.headCount;
     }
@@ -51,6 +47,7 @@ class TechnicalLead extends TechnicalEmployee {
     public boolean addReport(SoftwareEngineer e) {
         if (hasHeadCount()) {
             this.team.add(e);
+            e.setManager(this);
             return true;
         } else
             return false;
@@ -64,13 +61,18 @@ class TechnicalLead extends TechnicalEmployee {
             return false;
     }
 
-    // Should check if the bonus amount requested would be approved by the BusinessLead supporting this TechnicalLead.
-    // If it is, that employee should get that bonus and true should be returned. False should be returned otherwise
-  /*
-  public boolean requestBonus(Employee e, double bonus) {
-
-  }
-  */
+    // checks if the bonus amount requested would be approved by the BusinessLead supporting this TechnicalLead.
+    // If it is, that employee should get that bonus and true should be returned. False should be returned otherwise 
+    public boolean requestBonus(Accountant e, double bonus) {
+        if ( ((BusinessLead) getManager()).approveBonus(e, bonus) ) {
+          e.setBonusBudget(bonus);
+          return true;
+        } else {
+          return false;
+        }
+    
+    }
+  
 
     // returns team status
     public String getTeamStatus() {
@@ -79,7 +81,7 @@ class TechnicalLead extends TechnicalEmployee {
         } else {
             String returnString = employeeStatus() + "  and is managing:\n";
             for (SoftwareEngineer e:team) {
-                returnString.concat(e.employeeStatus() + "\n");
+                returnString = returnString.concat(e.employeeStatus() + "\n");
             }
             return returnString;
         }
